@@ -1,13 +1,17 @@
 import React, {useState, Fragment} from 'react';
-import { StyleSheet, Text, View } from 'react-native';
+import { StyleSheet, Text, View, Dimensions} from 'react-native';
+import { Container } from 'native-base';
 import Calendar from '../components/Calendar';
+
+const { height, width } = Dimensions.get('window');
 
 export default function inicio() {
   return (
     <Fragment>
-      <div style={{flex:1,justifyContent:'center',alignSelf:'center'}}>
-        <Calendar />
-      </div>
+      <View style={{flex:1,justifyContent:'center',alignContent:'center', backgroundColor:'#f35454', height:height, width:width}}>
+        {/* <Calendar /> */}
+        <Text>Hola chicos</Text>
+      </View>
   </Fragment>
   );
 }
