@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "326097845159",
+    "project_id": "cycleflow-6902f",
+    "storage_bucket": "cycleflow-6902f.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:326097845159:android:eebcea8985a448d99d9482",
+        "android_client_info": {
+          "package_name": "host.exp.platforms"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "326097845159-vvbrdutqourcl2cn35rf32luavbtp6nm.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAvhvnGH2lfBhatdPnYDeOpDC_WGDtanQM"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "326097845159-vvbrdutqourcl2cn35rf32luavbtp6nm.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

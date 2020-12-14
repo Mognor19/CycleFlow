@@ -2,6 +2,7 @@ import 'react-native-gesture-handler';
 import React from 'react';
 import { StyleSheet, Text, Image ,View} from 'react-native';
 import Inicio from './src/screens/inicio';
+import Sintomas from './src/screens/sintomas';
 import { NavigationContainer } from '@react-navigation/native';
 import { createMaterialTopTabNavigator } from '@react-navigation/material-top-tabs';
 
@@ -29,7 +30,8 @@ export default function App() {
         }}
         >
           <Tab.Screen name="Inicio" component={Inicio}  />
-          <Tab.Screen name="Settings"  component={Inicio} />
+          <Tab.Screen name="Sintomas"  component={Sintomas} />
+          <Tab.Screen name="Diario"   component={Inicio} />
         </Tab.Navigator>
       </NavigationContainer>
     </View>
