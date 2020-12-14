@@ -8,47 +8,103 @@ import { useEffect } from 'react';
 const { height, width } = Dimensions.get('window');
 
 export default function inicio() {
-    const [checkBoxDolordeCabeza, setCheckBoxDolordeCabeza] = useState(false);
-    const [checkBoxMareo, setCheckBoxMareo] = useState(false);
-    const [checkBoxDolorLumbar, setCheckBoxDolorLumbar] = useState(false);
-    const [checkBoxAcne, setCheckBoxAcne] = useState(false);
+  const [checkBoxDolordeCabeza, setCheckBoxDolordeCabeza] = useState(false)
+  const [checkBoxMareo, setCheckBoxMareo] = useState(false)
+  const [checkBoxDolorLumbar, setCheckBoxDolorLumbar] = useState(false)
+  const [checkBoxAcne, setCheckBoxAcne] = useState(false)
+  const [checkBoxGripe, setCheckBoxGripe] = useState(false)
+  const [checkBoxAntojos, setCheckBoxAntojos] = useState(false)
+  const [checkBoxCambiosHumor, setCheckBoxCambiosHumor] = useState(false)
+  const [checkBoxSensibilidad, setCheckBoxSensibilidad] = useState(false)
+  const [checkBoxFatiga, setCheckBoxFatiga] = useState(false)
+  const [checkBoxFiebre, setCheckBoxFiebre] = useState(false)
   
     return (
       <Fragment>
         <View style={{flex:1,justifyContent:'center',alignContent:'center', backgroundColor:'#f35454', height:height, width:width}}>
-            <View style={styles.checkboxContainer}>
-                <CheckBox
-                    disabled={false}
-                    value={checkBoxDolordeCabeza}
-                    onValueChange={(newValue) => setCheckBoxDolordeCabeza(newValue)}
-                />
-                \
-                <Text style={styles.label}>Dolor de Cabeza</Text>
-            </View>
-            <View style={styles.checkboxContainer}>
-                <CheckBox
-                    disabled={false}
-                    value={checkBoxMareo}
-                    onValueChange={(newValue) => setCheckBoxMareo(newValue)}
-                />
-                <Text style={styles.label}>Mareo</Text>
-            </View>
-            <View style={styles.checkboxContainer}>
-                <CheckBox
-                    disabled={false}
-                    value={checkBoxDolorLumbar}
-                    onValueChange={(newValue) => setCheckBoxDolorLumbar(newValue)}
-                />
-                <Text style={styles.label}>Dolor lumbar</Text>
-            </View>
-            <View style={styles.checkboxContainer}>
-                <CheckBox
-                    disabled={false}
-                    value={checkBoxAcne}
-                    onValueChange={(newValue) => setCheckBoxAcne(newValue)}
-                />
-                <Text style={styles.label}>Acné</Text>
-            </View>
+        <View style={{marginLeft:45, bottom:55}}>
+      <View style={styles.checkboxContainer}>
+      <CheckBox
+    disabled={false}
+    value={checkBoxDolordeCabeza}
+    onValueChange={(newValue) => setCheckBoxDolordeCabeza(newValue)}
+  />
+        <Text style={styles.label}>Dolor de Cabeza</Text>
+        </View>
+        <View style={styles.checkboxContainer}>
+        <CheckBox
+    disabled={false}
+    value={checkBoxMareo}
+    onValueChange={(newValue) => setCheckBoxMareo(newValue)}
+  />
+        <Text style={styles.label}>Mareo</Text>
+        </View>
+        <View style={styles.checkboxContainer}>
+        <CheckBox
+    disabled={false}
+    value={checkBoxDolorLumbar}
+    onValueChange={(newValue) => setCheckBoxDolorLumbar(newValue)}
+  />
+        <Text style={styles.label}>Dolor lumbar</Text>
+        </View>
+        <View style={styles.checkboxContainer}>
+        <CheckBox
+    disabled={false}
+    value={checkBoxAcne}
+    onValueChange={(newValue) => setCheckBoxAcne(newValue)}
+  />
+        <Text style={styles.label}>Acné</Text>
+        </View>
+        <View style={styles.checkboxContainer}>
+        <CheckBox
+    disabled={false}
+    value={checkBoxGripe}
+    onValueChange={(newValue) => setCheckBoxGripe(newValue)}
+  />
+        <Text style={styles.label}>Gripe</Text>
+        </View>
+        <View style={styles.checkboxContainer}>
+        <CheckBox
+    disabled={false}
+    value={checkBoxAntojos}
+    onValueChange={(newValue) => setCheckBoxAntojos(newValue)}
+  />
+        <Text style={styles.label}>Antojos</Text>
+        </View>
+        <View style={styles.checkboxContainer}>
+        <CheckBox
+    disabled={false}
+    value={checkBoxCambiosHumor}
+    onValueChange={(newValue) => setCheckBoxCambiosHumor(newValue)}
+  />
+        <Text style={styles.label}>Cambios de humor</Text>
+        </View>
+        <View style={styles.checkboxContainer}>
+        <CheckBox
+    disabled={false}
+    value={checkBoxSensibilidad}
+    onValueChange={(newValue) => setCheckBoxSensibilidad(newValue)}
+  />
+        <Text style={styles.label}>Sensibilidad de mamas</Text>
+        </View>
+        <View style={styles.checkboxContainer}>
+        <CheckBox
+    disabled={false}
+    value={checkBoxFatiga}
+    onValueChange={(newValue) => setCheckBoxFatiga(newValue)}
+  />
+        <Text style={styles.label}>Fátiga</Text>
+        </View>
+        <View style={styles.checkboxContainer}>
+        <CheckBox
+    disabled={false}
+    value={checkBoxFiebre}
+    onValueChange={(newValue) => setCheckBoxFiebre(newValue)}
+  />
+        <Text style={styles.label}>Fiebre</Text>
+        </View>
+
+    </View>
         </View>
     </Fragment>
     );
