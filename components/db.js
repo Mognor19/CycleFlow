@@ -50,21 +50,21 @@ const getSintomas =(setSintomasFunc)=>{
 });
 };
 
-const getAjustes =(setAjustesFunc)=>{
+const getDiario =(setDiarioFunc)=>{
   db.transaction9((tx)=>{
       tx.executeSql(
 
- "select * from Ajustes",
+ "select * from Diario",
     [],
     (_, { rows: { _array } }) => {
-      setAjustesFunc(_array);
+      setDiarioFunc(_array);
     },
     (_t, error) => {
-      console.log("Error al momento de obtener el Ajustes");
+      console.log("Error al momento de obtener el Diario");
       console.log(error);
     },
     (_t, _success) => {
-      console.log("ajustes obtenidos");
+      console.log("diario obtenidos");
     }
   );
 });
@@ -75,10 +75,9 @@ const getAjustes =(setAjustesFunc)=>{
 const insertCalendario = async (fechaI,  successFunc) => {
   const dato=fechaI[0];
   const dato2=fechaF[1];
-  const dato3=recordatorio[2];
       db.transaction(
         (tx) => {
-          tx.executeSql("insert into Calendario(fechaI,fechaF,recordatorio) values (?,?,?)", [dato,dato2,dato3]);
+          tx.executeSql("insert into Calendario(fechaI,fechaF) values (?,?)", [dato,dato2]);
         },
         (_t, error) => {
           console.log("Error al insertar el Calendario");
@@ -103,11 +102,10 @@ const insertCalendario = async (fechaI,  successFunc) => {
   const dato7=sensibilidad[7];
   const dato8=fatiga[8];
   const dato9=fiebre[9];
-  const dato10=diario[10];
       db.transaction(
         (tx) => {
-          tx.executeSql("insert into Sintomas(dolor_cabeza, mareo, acne, dolor_lumbar, gripe, flujo, manchado, sensibilidad, fatiga, fiebre, diario) values (?,?,?,?,?,?,?,?,?,?,?)", [
-            dato,dato1,dato2,dato3,dato4,dato5,dato6,dato7,dato8,dato9,dato10
+          tx.executeSql("insert into Sintomas(dolor_cabeza, mareo, acne, dolor_lumbar, gripe, flujo, manchado, sensibilidad, fatiga, fiebre) values (?,?,?,?,?,?,?,?,?,?)", [
+            dato,dato1,dato2,dato3,dato4,dato5,dato6,dato7,dato8,dato9
             
           ]);
         },
@@ -122,19 +120,18 @@ const insertCalendario = async (fechaI,  successFunc) => {
       );
     };
 
-    // Insertar Ajustes
-  const insertAjustes = async (color, successFunc) => {
-  const dato=color[0];
-  const dato2=notificacion[1];
+    // Insertar Diario
+  const insertDiario = async (diario, successFunc) => {
+  const dato=diario[0];
       db.transaction(
         (tx) => {
-          tx.executeSql("insert into Ajustes(color,notificacion) values (?,?)", [
-            dato,dato2
+          tx.executeSql("insert into Diario(diario) values (?)", [
+            dato,
             
           ]);
         },
         (_t, error) => {
-          console.log("Error al insertar el Ajustes");
+          console.log("Error al insertar el Diario");
           console.log(_t);
           console.log(error);
         },
@@ -180,15 +177,15 @@ const insertCalendario = async (fechaI,  successFunc) => {
     });
   };
 
-  // Borrar la tabla Ajustes
+  // Borrar la tabla Diario
   const dropDatabaseTableAsync = async () => {
     return new Promise((resolve, reject) => {
       db.transaction(
         (tx) => {
-          tx.executeSql("drop table Ajustes");
+          tx.executeSql("drop table Diario");
         },
         (_t, error) => {
-          console.log("Error al eliminar la tabla de Ajustes");
+          console.log("Error al eliminar la tabla de Diario");
           reject(error);
         },
         (_t, result) => {
@@ -226,7 +223,7 @@ const setupDatabaseTableAsync = async () => {
     db.transaction(
       (tx) => {
         tx.executeSql(
-          "create table if not exists Sintomas (PKsintomaID integer primary key autoincrement, dolor_cabeza int not null, mareo int not null, acne int not null, dolor_lumbar int not null, gripe int not null, flujo int not null, manchado int not null, sensibilidad int not null, fatiga int not null, fiebre int not null, diario text not null);"
+          "create table if not exists Sintomas (PKsintomaID integer primary key autoincrement, dolor_cabeza int not null, mareo int not null, acne int not null, dolor_lumbar int not null, gripe int not null, flujo int not null, manchado int not null, sensibilidad int not null, fatiga int not null, fiebre int not null);"
         );
       },
       (_t, error) => {
@@ -242,13 +239,13 @@ const setupDatabaseTableAsync = async () => {
   });
 };
 
-// Creación de la tabla de Ajustes
+// Creación de la tabla de Diario
 const setupDatabaseTableAsync = async () => {
   return new Promise((resolve, reject) => {
     db.transaction(
       (tx) => {
         tx.executeSql(
-          "create table if not exists Ajustes (PKajustesID integer primary key autoincrement, color string not null, notificacion string not null);"
+          "create table if not exists Diario (PKdiarioID integer primary key autoincrement, diario text not null);"
         );
       },
       (_t, error) => {
@@ -271,10 +268,10 @@ export const database = {
  
  getCalendario,
  getSintomas,
- getAjustes,
+ getDiario,
  insertCalendario,
  insertSintomas,
- insertAjustes,
+ insertDiario,
  setupDatabaseTableAsync,
  dropDatabaseTableAsync,
 };
