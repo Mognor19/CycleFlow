@@ -6,8 +6,8 @@
     "orientation": "portrait",
     "icon": "./assets/CycleFlow.png",
     "splash": {
-      "image": "./assets/splash.jpg",
-      "resizeMode": "fill",
+      "image": "./assets/splash.png",
+      "resizeMode": "cover",
       "backgroundColor": "#f35454"
     },
     "updates": {
