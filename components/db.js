@@ -9,7 +9,7 @@ const db = SQlite.openDatabase("CyclesFlow.db");
 //funcionalidades de la base de datos
 
 //obtener las notas del usuario
-
+/*
 const getCalendario =(setCalendarioFunc)=>{
     db.transaction9((tx)=>{
         tx.executeSql(
@@ -49,7 +49,7 @@ const getSintomas =(setSintomasFunc)=>{
   );
 });
 };
-
+*/
 const getDiario =(setDiarioFunc)=>{
   db.transaction9((tx)=>{
       tx.executeSql(
@@ -70,7 +70,7 @@ const getDiario =(setDiarioFunc)=>{
 });
 };
 
-
+/*
     // Insertar Calendario
 const insertCalendario = async (fechaI,  successFunc) => {
   const dato=fechaI[0];
@@ -119,7 +119,7 @@ const insertCalendario = async (fechaI,  successFunc) => {
         }
       );
     };
-
+*/
     // Insertar Diario
   const insertDiario = async (diario, successFunc) => {
   const dato=diario[0];
@@ -141,7 +141,7 @@ const insertCalendario = async (fechaI,  successFunc) => {
       );
     };
     
-    // Borrar la tabla Calendario
+/*    // Borrar la tabla Calendario
   const dropDatabaseTableAsync = async () => {
       return new Promise((resolve, reject) => {
         db.transaction(
@@ -176,7 +176,7 @@ const insertCalendario = async (fechaI,  successFunc) => {
       );
     });
   };
-
+*/
   // Borrar la tabla Diario
   const dropDatabaseTableAsync = async () => {
     return new Promise((resolve, reject) => {
@@ -194,7 +194,7 @@ const insertCalendario = async (fechaI,  successFunc) => {
       );
     });
   };
-
+/*
   // Creación de la tabla de Calendario
   const setupDatabaseTableAsync = async () => {
     return new Promise((resolve, reject) => {
@@ -238,7 +238,7 @@ const setupDatabaseTableAsync = async () => {
     );
   });
 };
-
+*/
 // Creación de la tabla de Diario
 const setupDatabaseTableAsync = async () => {
   return new Promise((resolve, reject) => {
@@ -260,18 +260,58 @@ const setupDatabaseTableAsync = async () => {
     );
   });
 };
+// Obtener la nota por el id
+const getDiarioById = (id, setDiarioFunc) => {
+  db.transaction((tx) => {
+    tx.executeSql(
+      "select * from Diario where id = ?",
+      [id],
+      (_, { rows: { _array } }) => {
+        setDiarioFunc(_array);
+      },
+      (_t, error) => {
+        console.log("Error al momento de obtener los diarios");
+        console.log(error);
+      },
+      (_t, _success) => {
+        console.log("Diarios obtenidas");
+      }
+    );
+  });
+};
 
 
-
+// Agrega una nota por defecto
+const setupDiarioAsync = async () => {
+  return new Promise((resolve, reject) => {
+    db.transaction(
+      (tx) => {
+        tx.executeSql("insert into Diario (diairio) values (?)", [
+          "Bienvenido a Fastnotes",
+        ]);
+      },
+      (_t, error) => {
+        console.log("Error al momento de insertar los valores por defecto");
+        console.log(error);
+        reject(error);
+      },
+      (_t, success) => {
+        resolve(success);
+      }
+    );
+  });
+};
 
 export const database = {
- 
+ /*
  getCalendario,
  getSintomas,
- getDiario,
  insertCalendario,
- insertSintomas,
+ insertSintomas,*/
+ getDiario,
  insertDiario,
  setupDatabaseTableAsync,
  dropDatabaseTableAsync,
+ getDiarioById,
+ setupDiarioAsync,
 };
