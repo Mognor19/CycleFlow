@@ -1,9 +1,8 @@
-import React, {useState, Fragment} from 'react';
-import { StyleSheet, Text, View, Dimensions, TouchableOpacity} from 'react-native';
-import { Button, Container } from 'native-base';
-import DateTimePicker from '@react-native-community/datetimepicker';
+import React, {useState, useEffect ,Fragment} from 'react';
+import { StyleSheet, Dimensions, ScrollView} from 'react-native';
+import * as Font from "expo-font";
+import {Text,View,H1,Textarea,Button , Content, Spinner} from 'native-base';
 import CheckBox from '@react-native-community/checkbox';
-import { useEffect } from 'react';
 
 const { height, width } = Dimensions.get('window');
 
@@ -18,13 +17,49 @@ export default function inicio() {
   const [checkBoxSensibilidad, setCheckBoxSensibilidad] = useState(false)
   const [checkBoxFatiga, setCheckBoxFatiga] = useState(false)
   const [checkBoxFiebre, setCheckBoxFiebre] = useState(false)
+  const [diario, setDiario] = useState("");
+  const [enableSave, setEnableSave] = useState(true);
+  const [errorDiario, setErrorDiario] = useState(false);
+  const [fontsLoaded, setFontsLoaded] = useState(false);
+
+  useEffect(() => {
+    if (diario) setEnableSave(false);
+    else setEnableSave(true);
+  }, [diario]);
   
+  const nuevaNota = async () => {
+    if (diario) {
+      await addnuevaNota(diario, refreshDiario);
+      navigation.goBack();
+    } else {
+      setErrorDiario(true);
+    }
+  };
+  useEffect(() => {
+    const loadFontsAsync = async () => {
+      await Font.loadAsync({
+        Roboto_medium: require("native-base/Fonts/Roboto_medium.ttf"),
+      }).then(() => {
+        setFontsLoaded(true);
+      });
+    };
+
+    loadFontsAsync();
+  }, []);
+
+  if (!fontsLoaded)
     return (
-      <Fragment>
-        <View style={{flex:1,justifyContent:'center',alignContent:'center', backgroundColor:'#f35454', height:height, width:width}}>
-        <View style={{marginLeft:45, bottom:55}}>
-      <View style={styles.checkboxContainer}>
+      <Content contentContainerStyle={styles.content}>
+        <Spinner color="blue" />
+      </Content>
+    );
+    return (
+      <ScrollView>
+        <View style={{flex:1,justifyContent:'center',alignContent:'center', backgroundColor:'#ea8f94', width:width}}>
+        <View style={{marginLeft:45, marginTop:30}}>
+        <View style={styles.checkboxContainer}>
       <CheckBox
+      tintColors={{true:'#ffffff', false:'#000000'}}
     disabled={false}
     value={checkBoxDolordeCabeza}
     onValueChange={(newValue) => setCheckBoxDolordeCabeza(newValue)}
@@ -33,6 +68,7 @@ export default function inicio() {
         </View>
         <View style={styles.checkboxContainer}>
         <CheckBox
+        tintColors={{true:'#ffffff', false:'#000000'}}
     disabled={false}
     value={checkBoxMareo}
     onValueChange={(newValue) => setCheckBoxMareo(newValue)}
@@ -41,6 +77,7 @@ export default function inicio() {
         </View>
         <View style={styles.checkboxContainer}>
         <CheckBox
+        tintColors={{true:'#ffffff', false:'#000000'}}
     disabled={false}
     value={checkBoxDolorLumbar}
     onValueChange={(newValue) => setCheckBoxDolorLumbar(newValue)}
@@ -49,6 +86,7 @@ export default function inicio() {
         </View>
         <View style={styles.checkboxContainer}>
         <CheckBox
+        tintColors={{true:'#ffffff', false:'#000000'}}
     disabled={false}
     value={checkBoxAcne}
     onValueChange={(newValue) => setCheckBoxAcne(newValue)}
@@ -57,6 +95,7 @@ export default function inicio() {
         </View>
         <View style={styles.checkboxContainer}>
         <CheckBox
+        tintColors={{true:'#ffffff', false:'#000000'}}
     disabled={false}
     value={checkBoxGripe}
     onValueChange={(newValue) => setCheckBoxGripe(newValue)}
@@ -65,6 +104,7 @@ export default function inicio() {
         </View>
         <View style={styles.checkboxContainer}>
         <CheckBox
+        tintColors={{true:'#ffffff', false:'#000000'}}
     disabled={false}
     value={checkBoxAntojos}
     onValueChange={(newValue) => setCheckBoxAntojos(newValue)}
@@ -73,6 +113,7 @@ export default function inicio() {
         </View>
         <View style={styles.checkboxContainer}>
         <CheckBox
+        tintColors={{true:'#ffffff', false:'#000000'}}
     disabled={false}
     value={checkBoxCambiosHumor}
     onValueChange={(newValue) => setCheckBoxCambiosHumor(newValue)}
@@ -81,6 +122,7 @@ export default function inicio() {
         </View>
         <View style={styles.checkboxContainer}>
         <CheckBox
+        tintColors={{true:'#ffffff', false:'#000000'}}
     disabled={false}
     value={checkBoxSensibilidad}
     onValueChange={(newValue) => setCheckBoxSensibilidad(newValue)}
@@ -89,6 +131,7 @@ export default function inicio() {
         </View>
         <View style={styles.checkboxContainer}>
         <CheckBox
+        tintColors={{true:'#ffffff', false:'#000000'}}
     disabled={false}
     value={checkBoxFatiga}
     onValueChange={(newValue) => setCheckBoxFatiga(newValue)}
@@ -97,37 +140,83 @@ export default function inicio() {
         </View>
         <View style={styles.checkboxContainer}>
         <CheckBox
+        tintColors={{true:'#ffffff', false:'#000000'}}
     disabled={false}
     value={checkBoxFiebre}
     onValueChange={(newValue) => setCheckBoxFiebre(newValue)}
   />
-        <Text style={styles.label}>Fiebre</Text>
-        </View>
-
+  <Text style={styles.label}>Fiebre</Text>
     </View>
         </View>
-    </Fragment>
+        <View style={{marginBottom:50,marginLeft:25, marginRight:25, marginTop:20}}>
+          <H1 style={{alignSelf:'center', color:'white'}}>Diario</H1>
+          <Textarea
+            rowSpan={5}
+            bordered
+            placeholder="Escribe algo..."
+            value={diario}
+            onChangeText={setDiario}
+            style={errorDiario ? styles.inputError : styles.diario}
+          />
+          {errorDiario ? (
+            <Text style={styles.error}>¡Debes ingresar una nota!</Text>
+          ) : null}
+          <Button
+            style={styles.button}
+            onPress={nuevaNota}
+            // disabled={enableSave}
+          >
+            <Text>Guardar</Text>
+          </Button>
+        </View>
+      </View>
+    </ScrollView>
     );
 }
 
-  const styles = StyleSheet.create({
-    fondo: {
+const styles = StyleSheet.create({
+  fondo: {
+    backgroundColor:'#f65555',
+    marginTop:50,
+    },
+    container: {
+      flex: 1,
+      alignItems: "center",
+      justifyContent: "center",
+    },
+    checkboxContainer: {
+      flexDirection: "row",
+      marginBottom: 20,
+    },
+    checkbox: {
+      alignSelf: "center",
+    },
+    label: {
+      margin: 8,
+      color:'white'
+    },
+    button: {
+      fontFamily: "Roboto",
+      alignSelf:'center',
       backgroundColor:'#f65555',
-      marginTop:50,
-      },
-      container: {
-        flex: 1,
-        alignItems: "center",
-        justifyContent: "center",
-      },
-      checkboxContainer: {
-        flexDirection: "row",
-        marginBottom: 20,
-      },
-      checkbox: {
-        alignSelf: "center",
-      },
-      label: {
-        margin: 8,
-      },
-  });
+      marginTop:20
+    },
+    error: {
+      fontSize: 12,
+      color: "red",
+      marginBottom: 10,
+    },
+    inputError: {
+      borderColor: "red",
+    },
+    note: {
+      borderColor: "black",
+      marginBottom: 10,
+    },
+    diario: {
+      borderColor:'white',
+      color:'white'
+    },
+});
+
+//Hecho por Melva
