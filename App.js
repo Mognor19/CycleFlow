@@ -3,6 +3,7 @@ import React from 'react';
 import { StyleSheet, Text, Image ,View} from 'react-native';
 import Inicio from './src/screens/inicio';
 import Sintomas from './src/screens/sintomas';
+import Diario from './src/screens/diario';
 import { NavigationContainer } from '@react-navigation/native';
 import { createMaterialTopTabNavigator } from '@react-navigation/material-top-tabs';
 
@@ -31,7 +32,7 @@ export default function App() {
         >
           <Tab.Screen name="Inicio" component={Inicio}  />
           <Tab.Screen name="Sintomas"  component={Sintomas} />
-          <Tab.Screen name="Diario"   component={Inicio} />
+          <Tab.Screen name="Diario"   component={Diario} />
         </Tab.Navigator>
       </NavigationContainer>
     </View>
