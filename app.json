@@ -4,11 +4,11 @@
     "slug": "CycleFlow",
     "version": "1.0.0",
     "orientation": "portrait",
-    "icon": "./assets/icon.png",
+    "icon": "./assets/CycleFlow.png",
     "splash": {
-      "image": "./assets/splash.png",
-      "resizeMode": "contain",
-      "backgroundColor": "#ffffff"
+      "image": "./assets/splash.jpg",
+      "resizeMode": "fill",
+      "backgroundColor": "#f35454"
     },
     "updates": {
       "fallbackToCacheTimeout": 0

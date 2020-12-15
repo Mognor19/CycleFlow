@@ -13,8 +13,8 @@ export default function App() {
     <View style={{flex:1 ,backgroundColor:'#f65555'}}>
       <NavigationContainer>
         <View style={{flexDirection:'row', alignSelf:'center', marginTop:50}}>
-          <Image source={require('./assets/CycleFlow.png')} alt="Logo" style={{width:50, height:50}}/>
-          <Text style={{fontSize:30, marginLeft:10, fontStyle:'italic'}}>CycleFlow</Text>
+          <Image source={require('./assets/Logo.png')} alt="Logo" style={{width:50, height:50}}/>
+          <Text style={{fontSize:30, marginLeft:10, fontStyle:'italic', color:'white'}}>CycleFlow</Text>
         </View>
         <Tab.Navigator 
         initialRouteName="Inicio"
